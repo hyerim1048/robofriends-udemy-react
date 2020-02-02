@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import { searchRobots } from './reducers';
 
+// connect : a component which knows redux store
 
 const store = createStore(searchRobots)
 // reducers 는 많아질 수 있음 
