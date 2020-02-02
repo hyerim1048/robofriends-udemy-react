@@ -5,14 +5,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 import { Provider, connect } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { searchRobots } from './reducers';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { searchRobots, requestRobots } from './reducers';
 import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+// wait see action and return object
 
 // connect : a component which knows redux store
 
 const logger = createLogger();
-const store = createStore(searchRobots, applyMiddleware(logger))
+
+const rootReducer = combineReducers({ searchRobots, requestRobots})
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
 // reducers 는 많아질 수 있음 
 
 
