@@ -7,18 +7,27 @@ import SearchBox from './SearchBox';
 
 
 class App extends React.Component {
-    constructor(props) {
+    constructor() {
         super() // to use this 
         this.state = { // that can be changed and affect apps 
-            robots: robots,
+            robots: [],
             searchfield: '' //2 states
         }
     }
+
+    componentDidMount() {
+        console.log(this.props.store)
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response=> response.json())
+        .then(users => {this.setState({ robots: users})})
+    }
+
     onSearchChange = (event) => {
         this.setState({ searchfield: event.target.value })
  
     }
     render() {
+        const { robots, searcfield} = this.state;
         const filteredRobots = this.state.robots.filter(robots => {
             return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
         }) // this.searchfield = undefined 라서 toLowerCase error 
